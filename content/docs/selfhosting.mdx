@@ -28,33 +28,37 @@ First, you need the `docker-compose.yml` file to define the services and an `.en
 
 ```yaml
 services:
-    api:
-        image: konyogonydev/wayclip-api:latest
-        container_name: wayclip_api
-        pull_policy: always
-        env_file:
-            - .env
-        ports:
-            - '8008:8080' # Host port:Container port
-        volumes:
-            - ./uploads:/usr/src/app/uploads
-        depends_on:
-            - wayclip_db
-        restart: unless-stopped
+  api_wayclip:
+    image: wayclip/api:latest
+    container_name: api_wayclip
+    pull_policy: always
+    env_file:
+      - .env
+    ports:
+      - "10.0.0.45:8080:8080"
+    volumes:
+      - ./uploads:/usr/src/app/uploads
+    depends_on:
+      - db_wayclip
+    command: >
+      sh -c "sqlx migrate run && ./wayclip-api"
+    restart: unless-stopped
 
-    wayclip_db:
-        image: postgres:16-alpine
-        container_name: wayclip_db
-        environment:
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            POSTGRES_DB: ${POSTGRES_DB}
-        volumes:
-            - postgres_data:/var/lib/postgresql/data
-        restart: unless-stopped
+  db_wayclip:
+    image: postgres:16-alpine
+    container_name: db_wayclip
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "10.0.0.45:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
 
 volumes:
-    postgres_data:
+  postgres_data:
 ```
 
 Next, create a file named `.env.template` to list all the required configuration variables. You will copy this to a `.env` file and fill it out in the next step.
@@ -81,27 +85,55 @@ GITHUB_CLIENT_SECRET=
 PUBLIC_URL=
 DISCORD_WEBHOOK_URL=
 
+
+
+```
+# -----------------------------
+# Database Configuration
+# -----------------------------
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=XxXxXxXxXxXxXxXxXxXxXxXx
+POSTGRES_PORT=5432
+POSTGRES_DB=wayclip
+DATABASE_URL=postgres://admin:XxXxXxXxXxXxXxXxXxXxXxXx@localhost:5432/wayclip
+
+# -----------------------------
+# General Server Settings
+# -----------------------------
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/0000000000000000000/XxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXxXx
+PUBLIC_URL=https://example.com
+
+# -----------------------------
+# Authentication
+# -----------------------------
+JWT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+REDIRECT_URI=https://example.com
+
 # -----------------------------
 # Storage Configuration
 # -----------------------------
-STORAGE_TYPE=
-LOCAL_STORAGE_PATH=
+STORAGE_TYPE=SFTP
+
+# -- LOCAL (only if STORAGE_TYPE=LOCAL)
+LOCAL_STORAGE_PATH=./uploads
 
 # -- SFTP (only if STORAGE_TYPE=SFTP)
 SFTP_HOST=
-SFTP_PORT=
+SFTP_PORT=22
 SFTP_USER=
 SFTP_PASSWORD=
-SFTP_REMOTE_PATH=
-SFTP_PUBLIC_URL=
+SFTP_REMOTE_PATH=uploads
+SFTP_PUBLIC_URL=https://example.com
 
 # -----------------------------
 # User Tier Limits
 # -----------------------------
-LIMIT_FREE=
-LIMIT_TIER1=
-LIMIT_TIER2=
-LIMIT_TIER3=
+LIMIT_FREE=2GB
+LIMIT_TIER1=50GB
+LIMIT_TIER2=200GB
+LIMIT_TIER3=1TB
 ```
 
 ### Step 2: Configure Your Instance
