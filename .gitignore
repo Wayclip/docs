@@ -85,3 +85,5 @@ coverage/
 *.pid
 *.seed
 *.pid.lock
+.next
+.source

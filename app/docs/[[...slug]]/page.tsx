@@ -22,6 +22,14 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
                         a: createRelativeLink(source, page),
                     })}
                 />
+                <a
+                    href={`https://github.com/wayclip/docs/blob/main/content/docs/${page.path}`}
+                    rel='noreferrer noopener'
+                    target='_blank'
+                    className='w-fit font-medium text-sm text-fd-secondary-foreground transition-colors hover:text-fd-accent-foreground '
+                >
+                    Edit on GitHub
+                </a>
             </DocsBody>
         </DocsPage>
     );
