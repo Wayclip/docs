@@ -194,7 +194,7 @@ export default function HomePage() {
                                         ))}
                                     </ul>
                                     <Button asChild className='px-6 py-3 mt-auto' variant={'outline'} size={'sm'}>
-                                        <a href='dash.wayclip.com'>
+                                        <a href='dash.wayclip.com' target='_blank' rel='noopener norefferer'>
                                             Purchase <ArrowRight />
                                         </a>
                                     </Button>
@@ -246,8 +246,8 @@ export default function HomePage() {
                                 <div className='text-sm text-muted-foreground'>Open Source License</div>
                             </div>
                             <div className='text-center'>
-                                <div className='text-3xl font-bold text-primary mb-2'>∞</div>
-                                <div className='text-sm text-muted-foreground'>Downloads</div>
+                                <div className='text-3xl font-bold text-primary mb-2'>150+</div>
+                                <div className='text-sm text-muted-foreground'>Hours of work</div>
                             </div>
                         </div>
                     </div>
@@ -287,6 +287,8 @@ export default function HomePage() {
                                 <li>
                                     <a
                                         href='https://github.com/konyogony/wayclip'
+                                        target='_blank'
+                                        rel='noopener norefferer'
                                         className='hover:text-foreground transition-colors'
                                     >
                                         GitHub
@@ -303,9 +305,21 @@ export default function HomePage() {
                                 <li>
                                     <a
                                         href='https://discord.gg/BrXAHknFE6'
+                                        target='_blank'
+                                        rel='noopener norefferer'
                                         className='hover:text-foreground transition-colors'
                                     >
                                         Discord
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href='https://status.wayclip.com'
+                                        target='_blank'
+                                        rel='noopener norefferer'
+                                        className='hover:text-foreground transition-colors'
+                                    >
+                                        Status
                                     </a>
                                 </li>
                                 <li>
