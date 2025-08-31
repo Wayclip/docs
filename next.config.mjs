@@ -6,9 +6,6 @@ const withMDX = createMDX();
 const config = {
     reactStrictMode: true,
     output: 'standalone',
-    async rewrites() {
-        return [{ source: '/api/search', destination: '/fd/search' }];
-    },
 };
 
 export default withMDX(config);
