@@ -2,9 +2,12 @@ FROM oven/bun:1-slim AS builder
 WORKDIR /app
 
 COPY package.json bun.lockb ./
+COPY source.config.ts tsconfig.json next.config.mjs ./
+
 RUN bun install --immutable
 
 COPY . .
+
 RUN bun run build
 
 FROM node:20-slim AS runner
