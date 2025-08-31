@@ -47,7 +47,7 @@ jobs:
               uses: docker/build-push-action@v5
               with:
                   context: .
-                  file: Dockerfile.runtime
+                  file: Dockerfile
                   push: true
                   tags: wayclip/docs:latest
                   platforms: linux/amd64,linux/arm64
