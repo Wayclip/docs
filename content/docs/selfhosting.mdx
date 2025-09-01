@@ -40,9 +40,16 @@ services:
       - ./uploads:/usr/src/app/uploads
     depends_on:
       - db_wayclip
-    command: >
-      sh -c "sqlx migrate run && wayclip_api"
     restart: unless-stopped
+    entrypoint: >
+      sh -c '
+        echo "Waiting for database to be ready..."
+        sleep 5
+        echo "Running database migrations from /usr/src/app/migrations..."
+        sqlx migrate run --source /usr/src/app/migrations --database-url "$$DATABASE_URL"
+        echo "Migrations complete. Starting API..."
+        /usr/local/bin/wayclip_api
+      '
 
   db_wayclip:
     image: postgres:16-alpine

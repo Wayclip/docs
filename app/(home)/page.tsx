@@ -1,4 +1,10 @@
 import Link from 'next/link';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/shadcn-button';
 import { Badge } from '@/components/ui/badge';
@@ -46,10 +52,30 @@ export default function HomePage() {
                             Download App
                             <ArrowRight className='w-4 h-4 ml-2' />
                         </Button>
-                        <Button variant='outline' className='px-8 py-3 bg-transparent'>
-                            <Terminal className='w-5 h-5 mr-2' />
-                            Install CLI
-                        </Button>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant='outline' className='px-8 py-3 bg-transparent'>
+                                    <Terminal className='w-5 h-5 mr-2' />
+                                    Install CLI
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align='center' className='w-40'>
+                                <DropdownMenuItem asChild>
+                                    <a
+                                        href='https://aur.archlinux.org/packages/wayclip-cli'
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        AUR
+                                    </a>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem asChild>
+                                    <a target='_blank' rel='noopener noreferrer'>
+                                        Nix
+                                    </a>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     </div>
 
                     <div className='flex items-center justify-center gap-6 text-sm text-muted-foreground'>
