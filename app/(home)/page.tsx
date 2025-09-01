@@ -220,7 +220,7 @@ export default function HomePage() {
                         <div className='flex flex-col sm:flex-row gap-4 justify-center mb-12'>
                             <Button variant='outline' className='px-6 py-3 bg-transparent' asChild>
                                 <a
-                                    href='https://github.com/konyogony/wayclip'
+                                    href='https://github.com/wayclip'
                                     target='_blank'
                                     rel='noopener norefferer'
                                 >
@@ -286,7 +286,7 @@ export default function HomePage() {
                             <ul className='space-y-2 text-sm text-muted-foreground'>
                                 <li>
                                     <a
-                                        href='https://github.com/konyogony/wayclip'
+                                        href='https://github.com/wayclip'
                                         target='_blank'
                                         rel='noopener norefferer'
                                         className='hover:text-foreground transition-colors'
