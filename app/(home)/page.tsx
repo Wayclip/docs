@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { toast, Toaster } from 'sonner';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -24,6 +25,8 @@ import {
     Code,
     Package,
 } from 'lucide-react';
+import { Shell } from '@/components/shell';
+import { App } from '@/components/app';
 
 export default function HomePage() {
     return (
@@ -47,11 +50,7 @@ export default function HomePage() {
                     </p>
 
                     <div className='flex flex-col sm:flex-row gap-4 justify-center mb-16'>
-                        <Button className='px-8 py-3'>
-                            <Download className='w-5 h-5 mr-2' />
-                            Download App
-                            <ArrowRight className='w-4 h-4 ml-2' />
-                        </Button>
+                        <App />
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant='outline' className='px-8 py-3 bg-transparent'>
@@ -69,11 +68,7 @@ export default function HomePage() {
                                         AUR
                                     </a>
                                 </DropdownMenuItem>
-                                <DropdownMenuItem asChild>
-                                    <a target='_blank' rel='noopener noreferrer'>
-                                        Nix
-                                    </a>
-                                </DropdownMenuItem>
+                                <Shell />
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </div>
@@ -81,13 +76,13 @@ export default function HomePage() {
                     <div className='flex items-center justify-center gap-6 text-sm text-muted-foreground'>
                         <div className='flex items-center gap-2'>
                             <Star className='w-4 h-4 text-primary' />
-                            <span>Soon available on AUR and Nix</span>
+                            <span>Tauri App will be avaiable soon</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section className='py-20 px-4 bg-muted/30'>
+            <section className='py-20 px-4 bg-muted/30' id='Features'>
                 <div className='container mx-auto max-w-6xl'>
                     <div className='text-center mb-16'>
                         <h2 className='text-4xl font-bold mb-4 text-balance'>Core Features</h2>
@@ -149,7 +144,7 @@ export default function HomePage() {
                 </div>
             </section>
 
-            <section className='py-20 px-4'>
+            <section className='py-20 px-4' id='Pricing'>
                 <div className='container mx-auto max-w-6xl'>
                     <div className='text-center mb-16'>
                         <h2 className='text-4xl font-bold mb-4 text-balance'>Simple Storage Pricing</h2>
@@ -220,7 +215,11 @@ export default function HomePage() {
                                         ))}
                                     </ul>
                                     <Button asChild className='px-6 py-3 mt-auto' variant={'outline'} size={'sm'}>
-                                        <a href='dash.wayclip.com' target='_blank' rel='noopener norefferer'>
+                                        <a
+                                            href={`https://dash.wayclip.com/tier/${plan.name.toLowerCase()}`}
+                                            target='_blank'
+                                            rel='noopener norefferer'
+                                        >
                                             Purchase <ArrowRight />
                                         </a>
                                     </Button>
@@ -245,11 +244,7 @@ export default function HomePage() {
                         </p>
                         <div className='flex flex-col sm:flex-row gap-4 justify-center mb-12'>
                             <Button variant='outline' className='px-6 py-3 bg-transparent' asChild>
-                                <a
-                                    href='https://github.com/wayclip'
-                                    target='_blank'
-                                    rel='noopener norefferer'
-                                >
+                                <a href='https://github.com/Wayclip' target='_blank' rel='noopener norefferer'>
                                     <Github className='w-5 h-5 mr-2' />
                                     View on GitHub
                                 </a>
@@ -363,6 +358,7 @@ export default function HomePage() {
                     </div>
                 </div>
             </footer>
+            <Toaster richColors theme='system' />
         </div>
     );
 }

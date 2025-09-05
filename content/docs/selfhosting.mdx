@@ -40,6 +40,7 @@ services:
       - ./uploads:/usr/src/app/uploads
     depends_on:
       - db_wayclip
+      - redis_wayclip
     restart: unless-stopped
     entrypoint: >
       sh -c '
@@ -64,8 +65,41 @@ services:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  db_backup:
+    image: postgres:16-alpine
+    container_name: db_backup
+    volumes:
+      - ./backups:/backups
+    depends_on:
+      - db_wayclip
+    environment:
+      - PGHOST=db_wayclip
+      - PGUSER=${POSTGRES_USER}
+      - PGPASSWORD=${POSTGRES_PASSWORD}
+      - PGDATABASE=${POSTGRES_DB}
+    entrypoint: |
+      sh -c '
+        while true; do
+          echo "Creating database backup..."
+          pg_dump -Fc > /backups/wayclip_db_backup_$(date +%Y-%m-%d_%H-%M-%S).dump
+          echo "Backup complete. Waiting 24 hours."
+          sleep 86400
+        done
+      '
+    restart: unless-stopped
+
+  redis_wayclip:
+    image: redis:7-alpine
+    container_name: redis_wayclip
+    restart: unless-stopped
+    ports:
+      - "6379:6379" 
+    volumes:
+      - redis_data:/data
+
 volumes:
   postgres_data:
+  redis_data: {}
 ```
 
 Next, create a file named `.env.template` to list all the required configuration variables. You will copy this to a `.env` file and fill it out in the next step.
@@ -79,6 +113,7 @@ POSTGRES_PASSWORD=XxXxXxXxXxXxXxXxXxXxXxXx
 POSTGRES_PORT=5432
 POSTGRES_DB=wayclip
 DATABASE_URL=postgres://admin:XxXxXxXxXxXxXxXxXxXxXxXx@wayclip_db:5432/wayclip
+REDIS_URL=redis://localhost:6379
 
 # -----------------------------
 # General Server Settings
@@ -223,10 +258,13 @@ To update your API to the latest version, run the following commands in your Way
 
 ```bash
 # Pull the latest Docker image
-docker-compose pull api
+docker-compose pull
 
 # Recreate the container with the new image
 docker-compose up -d
 ```
 
 The database migrations run automatically, so your data will be preserved.
+
+
+#### Very sorry, this is AI generated as a filler text (I promise I will update it) (But the info is true)
