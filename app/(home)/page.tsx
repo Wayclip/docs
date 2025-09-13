@@ -14,7 +14,6 @@ import {
     Terminal,
     Monitor,
     Github,
-    Download,
     Clock,
     FileVideo,
     Share2,

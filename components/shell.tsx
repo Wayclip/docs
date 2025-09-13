@@ -5,8 +5,8 @@ import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 
 export const Shell = () => {
     const handleCopy = () => {
-        copy('curl -fsSL https://wayclip.com/install-cli | sh');
-        toast.success('Copied `curl -fsSL https://wayclip.com/install-cli | sh` successfully');
+        copy('curl -fsSL https://wayclip.com/install-cli | bash');
+        toast.success('Copied `curl -fsSL https://wayclip.com/install-cli | bash`');
     };
 
     return (
