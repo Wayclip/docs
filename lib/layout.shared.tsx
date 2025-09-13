@@ -5,8 +5,12 @@ export const baseOptions = (): BaseLayoutProps => {
         nav: {
             title: <>Wayclip</>,
         },
-        githubUrl: 'https://github.com/konyogony/wayclip',
+        githubUrl: 'https://github.com/wayclip',
         links: [
+            {
+                text: 'Dashboard',
+                url: 'https://dash.wayclip.com/dash',
+            },
             {
                 text: 'Docs',
                 url: '/docs',
