@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { toast, Toaster } from 'sonner';
+import { Toaster } from 'sonner';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -299,6 +299,16 @@ export default function HomePage() {
                                         Pricing
                                     </a>
                                 </li>
+                                <li>
+                                    <a href='/privacy' className='hover:text-foreground transition-colors'>
+                                        Privacy Policy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href='/terms' className='hover:text-foreground transition-colors'>
+                                        Terms Of Service
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         <div>
@@ -315,10 +325,7 @@ export default function HomePage() {
                                     </a>
                                 </li>
                                 <li>
-                                    <Link
-                                        href={'/docs/contributing'}
-                                        className='hover:text-foreground transition-colors'
-                                    >
+                                    <Link href='/docs/contributing' className='hover:text-foreground transition-colors'>
                                         Contributing
                                     </Link>
                                 </li>
@@ -343,7 +350,7 @@ export default function HomePage() {
                                     </a>
                                 </li>
                                 <li>
-                                    <Link href={'/docs'} className='hover:text-foreground transition-colors'>
+                                    <Link href='/docs' className='hover:text-foreground transition-colors'>
                                         Documentation
                                     </Link>
                                 </li>
