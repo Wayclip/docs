@@ -1,11 +1,6 @@
 import Link from 'next/link';
 import { Toaster } from 'sonner';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { Download } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/shadcn-button';
 import { Badge } from '@/components/ui/badge';
@@ -24,8 +19,6 @@ import {
     Code,
     Package,
 } from 'lucide-react';
-import { Shell } from '@/components/shell';
-import { App } from '@/components/app';
 
 export default function HomePage() {
     return (
@@ -49,27 +42,18 @@ export default function HomePage() {
                     </p>
 
                     <div className='flex flex-col sm:flex-row gap-4 justify-center mb-16'>
-                        <App />
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant='outline' className='px-8 py-3 bg-transparent'>
-                                    <Terminal className='w-5 h-5 mr-2' />
-                                    Install CLI
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align='center' className='w-40'>
-                                <DropdownMenuItem asChild>
-                                    <a
-                                        href='https://aur.archlinux.org/packages/wayclip-cli'
-                                        target='_blank'
-                                        rel='noopener noreferrer'
-                                    >
-                                        AUR
-                                    </a>
-                                </DropdownMenuItem>
-                                <Shell />
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <Button asChild className='px-8 py-3'>
+                            <Link href='/download'>
+                                <Download className='w-5 h-5 mr-2' />
+                                Download App
+                            </Link>
+                        </Button>
+                        <Button variant='outline' className='px-8 py-3 bg-transparent'>
+                            <Link href='/download' className='flex flex-row items-center'>
+                                <Terminal className='w-5 h-5 mr-2' />
+                                Install CLI
+                            </Link>
+                        </Button>
                     </div>
 
                     <div className='flex items-center justify-center gap-6 text-sm text-muted-foreground'>

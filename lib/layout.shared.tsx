@@ -12,6 +12,11 @@ export const baseOptions = (): BaseLayoutProps => {
                 url: 'https://dash.wayclip.com/dash',
             },
             {
+                text: 'Download',
+                active: 'url',
+                url: '/download',
+            },
+            {
                 text: 'Docs',
                 url: '/docs',
                 active: 'nested-url',
