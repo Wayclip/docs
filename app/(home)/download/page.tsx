@@ -23,6 +23,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Download, Terminal } from 'lucide-react';
 import Link from 'next/link';
+import { SiDebian } from '@icons-pack/react-simple-icons';
 
 export default function DownloadPage() {
     const installScript = 'curl -fsSL https://wayclip.com/install-cli | bash';
@@ -99,16 +100,20 @@ export default function DownloadPage() {
                                     </Button>
 
                                     <Button asChild variant='outline' className='w-full'>
-                                        <a href='#' target='_blank' rel='noopener noreferrer'>
-                                            <SiNixos />
-                                            Nix Flake
+                                        <a
+                                            href='https://github.com/Wayclip/cli/releases/download/v0.1.85/wayclip-cli_0.1.85-1_amd64.deb'
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                        >
+                                            <SiDebian />
+                                            Debian Binary
                                         </a>
                                     </Button>
                                 </div>
                             </div>
 
                             <div>
-                                <h3 className='font-semibold mb-3 text-lg'>Install Script</h3>
+                                <h3 className='font-semibold mb-3 text-lg'>Install Script (recommended)</h3>
                                 <p className='text-sm text-muted-foreground mb-3'>
                                     Run the following command in your terminal to automatically download and install the
                                     latest version.
@@ -193,7 +198,9 @@ export default function DownloadPage() {
                             */}
                             <div className='mt-auto text-center'>
                                 <Link
-                                    href='https://github.com/wayclip/cli'
+                                    href='https://github.com/wayclip/cli/releases/latest'
+                                    target='_blank'
+                                    rel='noopener noreferrer'
                                     className='text-sm hover:underline text-muted-foreground'
                                 >
                                     View all releases on GitHub &rarr;

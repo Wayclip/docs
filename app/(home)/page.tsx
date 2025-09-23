@@ -152,7 +152,7 @@ export default function HomePage() {
                                 storage: '50GB',
                                 price: '$3.99',
                                 description: 'Great for regular content creators',
-                                features: ['50GB cloud storage'],
+                                features: ['50GB cloud storage', 'More features soon!'],
                                 popular: true,
                             },
                             {
@@ -160,7 +160,7 @@ export default function HomePage() {
                                 storage: '200GB',
                                 price: '$6.99',
                                 description: 'For power users and teams',
-                                features: ['200GB cloud storage'],
+                                features: ['200GB cloud storage', 'More features soon!'],
                                 popular: false,
                             },
                             {
@@ -168,7 +168,7 @@ export default function HomePage() {
                                 storage: '1TB',
                                 price: '$14.99',
                                 description: 'For professional workflows',
-                                features: ['1TB cloud storage'],
+                                features: ['1TB cloud storage', 'More features soon!'],
                                 popular: false,
                             },
                         ].map((plan) => (
@@ -183,9 +183,12 @@ export default function HomePage() {
                                         </Badge>
                                     </div>
                                 )}
-                                <CardHeader className='text-center pb-6'>
+                                <CardHeader className='text-center'>
                                     <CardTitle className='text-2xl mb-2'>{plan.storage}</CardTitle>
-                                    <div className='text-4xl font-bold mb-2'>{plan.price}</div>
+                                    <div className='text-4xl font-bold mb-2 flex flex-row gap-1 w-fit mx-auto'>
+                                        {plan.price}
+                                        <span className='text-sm text-zinc-400 mt-auto font-light'>/month</span>
+                                    </div>
                                     <CardDescription>{plan.description}</CardDescription>
                                 </CardHeader>
                                 <CardContent className='h-full flex flex-col gap-4'>
@@ -199,7 +202,7 @@ export default function HomePage() {
                                     </ul>
                                     <Button asChild className='px-6 py-3 mt-auto' variant={'outline'} size={'sm'}>
                                         <a
-                                            href={`https://dash.wayclip.com/tier/${plan.name.toLowerCase()}`}
+                                            href={`https://dash.wayclip.com/dash`}
                                             target='_blank'
                                             rel='noopener norefferer'
                                         >
@@ -242,7 +245,7 @@ export default function HomePage() {
 
                         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
                             <div className='text-center'>
-                                <div className='text-3xl font-bold text-primary mb-2'>1</div>
+                                <div className='text-3xl font-bold text-primary mb-2'>4</div>
                                 <div className='text-sm text-muted-foreground'>Contributors</div>
                             </div>
                             <div className='text-center'>
@@ -250,7 +253,7 @@ export default function HomePage() {
                                 <div className='text-sm text-muted-foreground'>Open Source License</div>
                             </div>
                             <div className='text-center'>
-                                <div className='text-3xl font-bold text-primary mb-2'>150+</div>
+                                <div className='text-3xl font-bold text-primary mb-2'>200+</div>
                                 <div className='text-sm text-muted-foreground'>Hours of work</div>
                             </div>
                         </div>
@@ -291,6 +294,16 @@ export default function HomePage() {
                                 <li>
                                     <a href='/terms' className='hover:text-foreground transition-colors'>
                                         Terms Of Service
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href='/return-policy' className='hover:text-foreground transition-colors'>
+                                        Return Policy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href='/support' className='hover:text-foreground transition-colors'>
+                                        Support
                                     </a>
                                 </li>
                             </ul>

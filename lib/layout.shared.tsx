@@ -8,6 +8,10 @@ export const baseOptions = (): BaseLayoutProps => {
         githubUrl: 'https://github.com/wayclip',
         links: [
             {
+                text: 'Front Page',
+                url: '/',
+            },
+            {
                 text: 'Dashboard',
                 url: 'https://dash.wayclip.com/dash',
             },
