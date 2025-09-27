@@ -3,81 +3,107 @@ title: About Wayclip
 description: Learn more about us
 ---
 
-## What is Wayclip?
+# What is Wayclip?
 
-Wayclip is an **open-source instant replay and screen recording tool** designed for modern Linux desktops, built from the ground up for **Wayland** and **PipeWire**.
+Wayclip, is an open-source, community driven project, which aims at providing an easy way to get instant replays of your favourite moments. This tool is built for the Linux community, and works with [Pipewire](https://pipewire.org/) and [Wayland](https://wayland.freedesktop.org/).
 
-It solves a long-standing gap: while Windows and macOS users have seamless tools for capturing replays and clips, Linux — especially Wayland — lacked a reliable and efficient solution. Wayclip changes that by combining **native performance**, **flexible workflows**, and **open-source transparency**.
+# Whats the story?
 
-## How It Started
+I myself, am a gamer, Arch user and a developer. Ive come across this issue where on linux distros, there werent many good and ready-to-use "clipping" solutions, that can provide you with instant replays.
+I saw this as a great opportunity and started slaving away on my own implemnetation. After months of work, research and pain I have finally achieved a *somewhat* working version of Wayclip.
+Since then this has grown from a small idea, to a full on ecosyste, with its own CLI, rust library, API, docker containers, and much more.
 
-Wayclip began as a solo project when I realized there was no ready-to-use solution for instant replays on Linux. Four months ago, I built the first prototype: a recording engine that buffers the screen and lets you save the last few seconds with a hotkey.
+As I was building and developing Wayclip, I followed a single, simple idea: **to make something, that I would use daily**
 
-From there, the project grew into a **complete ecosystem**: a recording daemon, a CLI for automation, a GUI for everyday users, and a self-hostable backend for storage and sharing. Almost the entire stack is written in **Rust** for performance and reliability, with a small amount of frontend code built using modern web technologies.
+# Where to download?
 
-The guiding principle has always been simple: **build something I would want to use daily**.
-
-## Core Features
-
-Wayclip is designed for both **casual users** and **power users**. Out of the box, it provides:
-
-- ⚡ **Instant Replay** — buffer your screen and save the last few seconds with a single hotkey.
-- 🖥️ **Wayland Native** — works seamlessly with Wayland and PipeWire.
-- ✂️ **Built-in Editor** — quickly trim and edit clips before sharing.
-- ☁️ **Cloud Storage (optional)** — store and share clips online, or keep them local for privacy.
-- 🔗 **Easy Sharing** — generate links instantly for bug reports, tutorials, or collaboration.
-- 🛠️ **Self-Hostable API** — run your own backend for complete control over storage and data.
-
-## The Ecosystem
-
-Wayclip is not just one app — it’s a set of tools that work together:
-
-- **wayclip_core** — the low-level daemon and recording engine built on PipeWire + FFmpeg.
-- **wayclip_gui** _(coming soon)_ — a Tauri-based desktop application (under active development, optimized for Wayland).
-- **wayclip_cli** — a command-line interface for automation, scripting, and minimal setups.
-- **wayclip_docs** — documentation powered by Fumadocs.
-- **wayclip_api** — a self-hostable backend for clip storage, management, and sharing.
-- **wayclip_dash** _(coming soon)_ — a web dashboard for managing your account, billing and more.
-
-## Pricing & Storage
-
-Wayclip is **completely free to use** for local recordings. Cloud storage is optional and billed only if you need more space for sharing.
-
-- **Free** — 2GB cloud storage, unlimited local recording.
-- **Basic ($3.99)** — 50GB cloud storage.
-- **Plus ($6.99)** — 200GB cloud storage.
-- **Pro ($14.99)** — 1TB cloud storage.
-
-This keeps the core app open and accessible to everyone, while giving creators and teams room to scale.
-
-## Open Source & Community
-
-Wayclip is **MIT-licensed** and developed in the open. You can inspect the code, contribute, or fork it for your own use cases.
-
-- [View on GitHub](https://github.com/konyogony/wayclip)
-- [Join our Discord community](https://discord.gg/BrXAHknFE6)
-- [Read the documentation](/docs)
-
-We believe Linux users deserve the same polished, modern tools as any other platform — and we’re building them together.
-
-## Roadmap
-
-- ✅ Core recording engine (done)
-- ✅ CLI (launching with release)
-- 🚧 GUI app (in progress, optimized for Wayland)
-- 🚧 Dashboard (coming soon)
-- 🌐 Windows support
-
-## Why Wayclip?
-
-Wayclip is more than just another screen recorder. It’s:
-
-- **Native to Linux** — built for Wayland + PipeWire, not a port or workaround.
-- **Performance-driven** — optimized with Rust for speed and low overhead.
-- **Flexible** — from hotkey replays to automation scripts and self-hosted APIs.
-- **Community-first** — fully open source, shaped by real Linux users.
-
-Wayclip is here to bring **instant replay to Linux**, finally — without compromises.
+Currently Wayclip provides only a few methods of installation, but we slowly expand. Reffer to this table to know the current status of downloads for your system. You can find all the appropriate download links [here](/download).
 
 
-#### Very sorry, this is AI generated as a filler text (I promise I will update it)
+| Distro          | Display Server | Architecture | Status       | Download Wayclip CLI        |
+|-----------------|---------------|-------------|-------------|-----------------------------|
+| Ubuntu 24.04    | X11           | x86_64      | ⚠ Not tested  | deb / install script       |
+| Ubuntu 24.04    | Wayland       | x86_64      | ⚠ Not tested  | deb / install script       |
+| Ubuntu 24.04    | X11           | ARM64       | ⚠ Not tested  | deb / install script       |
+| Ubuntu 24.04    | Wayland       | ARM64       | ⚠ Not tested  | deb / install script       |
+| Fedora 40       | X11           | x86_64      | ⚠ Not tested  | install script             |
+| Fedora 40       | Wayland       | x86_64      | ⚠ Not tested  | install script             |
+| Fedora 40       | X11           | ARM64       | ❌ Not available | install script             |
+| Fedora 40       | Wayland       | ARM64       | ❌ Not available | install script             |
+| Arch Linux      | X11           | x86_64      | ⚠ Not tested  | AUR / install script       |
+| Arch Linux      | Wayland       | x86_64      | ✅ Tested      | AUR / install script       |
+| Arch Linux      | X11           | ARM64       | ⚠ Not tested  | AUR / install script       |
+| Arch Linux      | Wayland       | ARM64       | ⚠ Not tested  | AUR / install script       |
+
+*Note: This table is not up-to-date, and will be updated soon*
+
+# Core features
+
+Wayclip provides many features for our users:
+- Instant replay. Record your screen in any quality, size and variation, and save the last few moments with a single hot-key.
+- Clip sharing. We provide access to sharing your clips for all users, where you can upload it to our API, and share the link easily in discord, or anywhere else.
+- Self-Hostable. I personally think that this is a really important feature for Wayclip, as it allows to run your own backend for full control over everything. (*🚧 Work in progress 🚧*)
+- Cloud Storage. Each free user recieves 2GB of cloud storage, for sharing and saving clips on our API. Note: This is entirley optional, and you can save your clips locally
+
+# Eco system
+
+Wayclip has an extensive eco-system and I will quickly run through how everything works at the surface level.
+
+## Wayclip Core
+
+I have developed a `wayclip_core` rust crate. In this crate you can find all the useful libraries which are used extensively throughout the other applications.
+In addition to the crate, `wayclip_core` is also responsible for providing the daemon and trigger binaries. These binaries are then fetched dynamically (AUR & Install script),
+or baked (.deb) straight into the CLI for further use. Everything relies on the `wayclip_core` part. If you want to explore more, visit [Wayclip Core repository](https://github.com/Wayclip/core)
+
+## Wayclip CLI
+
+The CLI for Wayclip, was made to have *an* option to use Wayclip, while the GUI is being developed. Now, I think that the CLI might overcome the GUI entirely due to the simplistic design and ease of use.
+The CLI allows for *most* functions of the upcoming GUI application, for example, video cropping, sharing, searching, deleting, etc... The CLI is built entirely in Rust, and is actually awaiting a rewrite (as is most of the project).
+You can read more about the CLI [here](/docs/cli), or go technical by going over to the [Wayclip CLI repository](https://github.com/Wayclip/cli)
+
+## Wayclip GUI
+
+Wayclip GUI is an upcoming module for Wayclip, which will be a Tuari application, providing a useful interface for managing, editing and uploading your clips. The development of this is ongoing, but has its own problems.
+For starters, Im developing it on Wayland, with an NVIDIA GPU, and if you tried this before, you KNOW its very painful. I will find a solution to this, and build the GUI after bringing up the rest of my eco system up to standart.
+I think that focusing on making a better daemon, cli is more important than a cool UI. UX > UI :).
+Current time frame for the GUI: ~3 months.
+
+## Wayclip API
+
+The API for wayclip is built with rust, and [actix-web](https://actix.rs/). The API is one of the main components of this project, as it handles auth, sharing, storage, and everythig else.
+Currently, the API is not *fully* self-hostable, but I am doing my best. Find out more in the [Wayclip API repository](https://github.com/Wayclip/api)
+
+## Wayclip Dashboard
+
+There is also a [dashboard](https://dash.wayclip.com) for Wayclip, which is responsible for managing your account, including all the clips and subscriptions in the browser. For admins, this is a powerful tool for controling all your users, subscriptions, storage and reports.
+The dashboard is not the best, and certainly needs improvement, but feel free to use it, as it works. Find out more about it over at the [Wayclip Dash repository](https://github.com/Wayclip/dash)
+
+
+## Wayclip Docs
+
+I am using [fumadocs](https://fumadocs.dev/) for the documentation side of Wayclip. I am trying my best to keep this documentation relevant, and up to date. For contributing to the docs, visit [Waylcip Docs repository](https://github.com/Wayclip/docs)
+
+# Pricing & Subscription models
+
+A subscription is **NOT MANDATORY** to use Wayclip. When purchasing a subscription, you get an increased amount of cloud storage, allowing for more clips to be hosted, as well as other premium features (which I will add later).
+The subscription model goes, as following:
+
+- Free plan - 2GB storage, all normal features
+- Basic plan (3.99$/month) - 50GB storage
+- Plus plan (8.99$/month) - 200GB storage
+- Pro plan (13.99$/month) - 1TB storage
+
+All subscriptions are managed through stripe, and you can get one by creating an account in the [dashboard](https://dash.wayclip.com)
+
+# Open Source & community
+
+All parts of wayclip are licensed under [**MIT**](https://github.com/Wayclip/core/blob/main/LICENSE). We encourage you to dive deep into the code, contribute, and suggest imporvemnets. Here are some useful resources for you:
+
+- [Github Organisation](https://github.com/Wayclip)
+- [Discord Server](https://discord.gg/BrXAHknFE6)
+- [Task tracking / TODO List](https://github.com/orgs/Wayclip/projects/1)
+
+# AI & Vibe-coding
+
+I have been working on this project by myself, and I consider using AI for its development is a necessity. I try to control myself and not develop EVERYTHING using it. To combat this, I have set out a plan to have a propper rewrite of all the modules in the future.
+Hopefully, what I said here will not cause issues.
