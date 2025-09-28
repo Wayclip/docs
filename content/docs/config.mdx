@@ -3,91 +3,95 @@ title: Configuration
 description: Learn to configure Wayclip
 ---
 
-# Wayclip Settings Guide
+# Configuration
 
-Wayclip allows you to customize how the app records and saves clips, controls audio, and interacts with the GUI and CLI. This page walks you through the main settings you can configure.
+Wayclip allows its users to customize how the CLI & daemon will behave, including the storage location paths, quality of videos & other useful features. In this guide we will go through the standard config that you may edit yourself.
 
-## Config File Location
+## File structure
 
-Wayclip stores its configuration in a `settings.json` file. The default path is:
+By default, the config path is `~/.config/wayclip/config.json`. The wayclip directory is also used to store the metadata of your clips in a `data.json` file, alongside the clip previews (for the upcoming GUI).
+As of current moment, the file structure of the location of the config and the metadata is hardcoded, and most likely won't change. You can edit the config file via your favourite editor, or by writing `wayclip-cli config`, if you have our CLI installed.
+*Note: Missing or corrupted fields will be ignored & new ones will be created instead*
 
-```bash
-~/.config/wayclip/settings.json
-```
+# Video settings
 
-<Callout title="Note">
-You can access the config using your default editor via our CLI
+Let's go through the video settings that you can adjust to increase or decrease the quality of the clips recorded, alongside other information related to the clips themselves.
 
-```bash
-wayclip-cli config
-```
+## Clip Name Formatting
 
+`clip_name_formatting` field is responsible for naming all your clips. You can write anything you like, alongside placeholders like `%Y-%m-%d_%H-%M-%S` which will be parsed according to the current time.
+I am personally not aware of the full list of placeholders available, so experiment on your own.
+
+## Clip Length
+
+You can specify the duration for how long your recording will be buffered for. You can edit the field `clip_name_s` by specifying an integer value in seconds. I recommend going with about 2 minutes (120 seconds),
+as it gives a good balance between performance and length. Please note that as you increase the video length, the RAM & VRAM usage **WILL** increase, and on lower-end machines, it may bottleneck or even cause crashes.
+
+## Clip Resolution
+
+By changing the `clip_resolution` you can specify to what resolution the captured frames will be formatted. The formatting for this field is as follows: `2560x1440`. Also, by increasing this field, the amount of resources used will increase.
+Please also note that I am not confident that weird resolutions will work, or even look good, so please try at your own risk.
+
+## Clip FPS
+
+We can also alter how many frames are being captured per second by changing `clip_fps`. This should be an integer value, default is `60`. This will also affect performance.
+
+## Video bitrate
+
+Now, we have a video bitrate setting `video_bitrate`, which will be passed into the gstreamer pipeline, determining the **average** bitrate of the video clip. I am not guaranteeing that this setting works as expected, or that it will produce correct results.
+Also, to determine if the setting is in `bps` or `kbps` refer to your GPU manufacturer and gstreamer documentation. I am using an NVIDIA GPU, so I *think* that it's in `kbps`, which is why the default is `15000`. Adjust this as you see fit.
+
+## Video & Audio codec
+
+You can adjust the `video_codec` and `audio_codec` settings, but again, at your own risk. I would just leave it as the default values of `h264` and `aac` respectively.
+I do know that the code is designed to pick up the correct GPU settings and use the right codec. Just try it, I'm unsure about my own code (yes this is the sloppiest documentation ever) :)
+
+## Save location
+
+If you want to change where the clips are saved to, you can edit the `save_path_from_home_string` field. Which, as the name tells us, should be a string pointing to an existing directory starting from the home path. For example: `Videos/wayclip`.
+
+# Misc settings
+
+## Save Shortcut
+
+Do not trust me on this, but you can edit the shortcut used for saving the clip in `save_shortcut`. But again, I might have accidentally hardcoded it to Alt+C for all distros. Default: `Alt+C`. Also, please refer to the logs when starting the daemon using `wayclip-cli daemon logs`,
+as it will show you if the bind has been applied successfully. So far, I have tested on Arch + Hyprland setup, so it calls `hyprctl` and adds the bind there. The process may vary from distro to distro so please be aware. A table with all tested distros and systems will be added in the future.
+
+<Callout>
+If a bind has **NOT** been added, you can also use the `wayclip-cli save` command to trigger the saving process.
 </Callout>
 
-You can also save clips relative to your home directory, e.g., `Videos/wayclip`. All paths are automatically resolved from your home folder unless specified otherwise.
+## Open GUI shortcut, Toggle Notifications and GUI Socket Path
 
-## GUI Settings
+Well, as the GUI is not released yet, these two settings are useless. You can just ignore them, but they are here now for my own sake of testing and developing.
 
-Inside the Wayclip app (GUI), you can configure:
+## Daemon socket and process ID path.
 
-- **Save Shortcut** – Quickly save a clip. Default: `Alt+C`.
-- **Open GUI Shortcut** – Opens the Wayclip GUI from anywhere. Default: `Ctrl+Alt+C`.
-- **Toggle Notifications** – Enable or disable notifications when clips are saved.
+It's best NOT to edit these paths, as they are critical for the daemon to work (even though I'm pretty sure I don't need the PID path AT ALL, still better be safe).
 
-These are the main user-facing GUI options, and you can update them directly through the app interface.
+## Trigger path
 
-## CLI (`wayclip-cli`) Settings
+This field will most likely be auto-regenerated at runtime since it searches for the `trigger` binary location which depends on the method of installation (AUR/Install Script).
 
-The CLI uses the same configuration file as the GUI. Key options include:
+## API URL
 
-- **API URL** – The server endpoint for clip uploads. Default: `http://127.0.0.1:8080`.
-- **Auth Token** – Optional token for authentication.
-- **Daemon PID & Socket Paths** – Control where the background process runs and how it communicates:
+If you are self-hosting (which I will fix soon), you can also edit the `api_url` field which will alter the destination to which requests will be sent. Meaning Auth, Storage and much more can be handled through your own infra.
 
-```text title="Default Paths"
-/tmp/wayclipd.pid
-/tmp/wayclipd.sock
-/tmp/wayclipg.sock
-```
+## Auth token
 
-<Callout>You usually don’t need to change these unless you are running multiple instances.</Callout>
+This value is constantly regenerated and re-used for the authentication system in the CLI. Just ignore this field.
 
-## Clip Recording Settings
+# Audio
 
-These settings control how your recordings are captured:
+## Mic & Bg Node name
 
-- **Clip Name Format** – Determines the naming convention for saved clips. Default: `%Y-%m-%d_%H-%M-%S`.
-- **Clip Length** – Default duration in seconds. Default: `120`.
-- **Resolution & FPS** – Choose your video quality. Default: `1920x1080 @ 60 FPS`.
-- **Video & Audio Codec** – Default: `h264` (video) and `aac` (audio).
-- **Video Bitrate** – Default: `15000 kbps`.
+Wayclip pulls the default node name for your audio device from `pavucontrol` or anywhere else. Again, this may not work as expected, so edit these two fields as you wish. You can get more info on your audio devices through the following commands:
+`pw-cli ls Node` & `pw-cli info <NodeID>`, or `pw-top`. You shall add the correct source/sink for the `mic_node_name` and `bg_node_name` settings from which the audio will be pulled during recording.
 
-## Audio Settings
+## Mic & Bg volume
 
-Wayclip lets you include microphone and background audio in your clips:
+You can adjust the percentage volume of each of the sources here. Has to be an integer value from 0-100. Edit the `mic_volume` and `bg_volume` settings to your liking. I recommend going `100/75`.
 
-- **Mic Node Name & Background Node Name** – Select your default audio input/output devices. By default, Wayclip uses your system’s default devices.
-- **Mic & Background Volume** – Mic: 100%, Background: 75%.
-- **Include Mic Audio / Include Background Audio** – Enable or disable specific audio tracks in your clips.
+## Include Mic & Bg audio
 
-## Advanced / Developer Settings
-
-These settings are mostly for developers or power users:
-
-- **Custom Paths** – Override default save paths using relative paths from your home directory.
-- **Merging Old Settings** – Wayclip automatically merges new default settings with any existing configuration, ignoring unknown keys.
-- **Serialization** – Settings are automatically saved in JSON format and reloaded on app start.
-
-## Quick Tips
-
-- If Wayclip fails to load a settings file, it will create a new one with default values.
-- Be careful when editing `settings.json` manually — unknown keys are ignored, but invalid formats may reset your settings.
-- GUI and CLI always share the same configuration, so updates in one reflect in the other.
-
-<Callout title='Workflow Tip'>
-    With these settings, you can fine-tune how Wayclip captures, names, and saves your clips while controlling audio and
-    shortcuts to match your workflow.
-</Callout>
-
-
-#### Very sorry, this is AI generated as a filler text (I promise I will update it)
+You can also control which sources are being used in the recording, by adjusting the boolean value in the `include_bg_audio` and `include_mic_audio` fields.
