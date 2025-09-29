@@ -206,7 +206,7 @@ export default function HomePage() {
                                             target='_blank'
                                             rel='noopener norefferer'
                                         >
-                                            Purchase <ArrowRight />
+                                            {plan.name === 'Free' ? 'Register' : 'Purchase'} <ArrowRight />
                                         </a>
                                     </Button>
                                 </CardContent>
