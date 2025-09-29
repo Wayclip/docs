@@ -1,4 +1,5 @@
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { baseOptions } from '@/lib/layout.shared';
 import type { Metadata } from 'next';
 
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: LayoutProps<'/'>) {
-    return <HomeLayout {...baseOptions()}>{children}</HomeLayout>;
+    return (
+        <HomeLayout {...baseOptions()}>
+            <GoogleAnalytics gaId='G-02WR5N6EWT' />
+            {children}
+        </HomeLayout>
+    );
 }
